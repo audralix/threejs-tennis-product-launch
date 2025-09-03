@@ -1,0 +1,618 @@
+:root {
+  --header-h: 72px;
+  --bp-tablet: 1024px;
+  --bp-mobile: 768px;
+  --nav-bg: rgba(8, 12, 10, 0.9);
+  --scrim: rgba(0, 0, 0, 0.5);
+  --secondary-color: #f2e302;
+  --font-sans: "Roboto Flex", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Arial, sans-serif;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav__menu {
+    position: absolute;
+    top: calc(100% + 8px); /* sits just below the bar */
+    right: 16px; /* aligns with the bar’s right padding */
+    left: auto;
+    width: min(320px, calc(100vw - 32px));
+    background: var(--nav-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+
+    /* closed state */
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform-origin: top right;
+    transform: scale(0.98);
+    transition: max-height 0.3s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .nav--open .nav__menu {
+    max-height: 80vh;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  /* vertical list inside the dropdown */
+  .nav__list {
+    display: grid;
+    gap: 6px;
+    padding: 8px;
+  }
+  .btn-primary {
+    display: block;
+    width: calc(100% - 16px);
+    margin: 8px;
+  }
+
+  /* Show hamburger, collapse inline nav */
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /*   .container {
+    max-width: 680px;
+  } */
+}
+
+@media (min-width: 768px) {
+  .nav__toggle {
+    display: none;
+  }
+  .nav__menu {
+    position: static;
+    width: auto;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    max-height: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+  .nav__list {
+    display: flex;
+    gap: 12px;
+    padding: 0;
+  }
+  .btn-primary {
+    margin: 0 0 0 8px;
+    width: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-right.segment-card {
+    grid-column: 8 / span 5;
+  }
+}
+@media (max-width: 640px) {
+  .grid-right.segment-card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- ≤ 1024px: copy top-left, feedback bottom-right ---------- */
+@media (max-width: 768px) {
+  .grid-section {
+    /* keep 12 cols, switch to 3 rows so we can pin top/bottom */
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr auto; /* top / flexible middle / bottom */
+    min-height: 100svh; /* fill the viewport reliably on mobile */
+  }
+
+  /* copy block: top-left */
+  .grid-left {
+    grid-column: 1 / span 8; /* adjust to taste (1 / -1 if you want full width) */
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* feedback card: bottom-right */
+  .grid-right {
+    grid-column: 7 / -1; /* right side columns */
+    grid-row: 3; /* bottom row */
+    justify-self: end; /* push to right edge of its columns */
+    align-self: end; /* stick to bottom */
+    width: min(360px, 90%); /* prevent overflow on small screens */
+    transform: translateY(-200px); /* move ~200px up */
+  }
+
+  .section-1 .grid-section {
+    position: relative; /* anchor for absolute eyebrow */
+    grid-template-rows: 1fr; /* one row; copy sits at bottom */
+    min-height: 100svh;
+  }
+
+  /* make sure .grid-left isn't the containing block */
+  .section-1 .grid-left {
+    position: static !important;
+    overflow: visible; /* avoid clipping the eyebrow */
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: end; /* bottom of frame */
+    justify-self: start;
+    max-width: min(560px, 92vw);
+    padding-inline: clamp(16px, 4vw, 24px);
+    gap: clamp(10px, 2.2vw, 16px);
+    transform: translateY(-200px);
+    text-align: left;
+  }
+
+  /* eyebrow pinned to the top-left of the whole section */
+  .section-1 .grid-left .intro {
+    top: max(env(safe-area-inset-top), clamp(8px, 3vh, 24px));
+    left: clamp(16px, 4vw, 24px);
+    margin: 0;
+    z-index: 5;
+    text-align: left;
+  }
+
+  /* type sizing (optional) */
+  .section-1 .headline {
+    font-size: clamp(28px, 8.6vw, 32px);
+    line-height: 1.08;
+    margin: 0;
+  }
+  .section-1 .subhead {
+    font-size: clamp(14px, 3.3vw, 18px);
+    margin: 2px 0 10px;
+    opacity: 0.9;
+  }
+}
+
+/* Optional: very small phones — let the copy span full width */
+@media (max-width: 560px) {
+  .grid-left {
+    grid-column: 1 / -1;
+  }
+  .grid-right {
+    grid-column: 6 / -1;
+  } /* keeps it right-anchored but with more room */
+}
+
+/* ===== Tablet: iPad & below ===== */
+@media (max-width: 1024px) {
+  :root {
+    --fab-size: 56px;
+    --fab-gap: clamp(16px, 2vw, 24px);
+    --z-fab: 1002; /* above canvas/cards */
+  }
+
+  .grid-section {
+    /* 8-col tablet grid + more rows for vertical rhythm */
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(12, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 24px);
+    max-height: none; /* allow natural height */
+    padding-block: var(--section-py-sm, 40px);
+    align-items: start;
+  }
+
+  /* Left content block */
+  .grid-left {
+    grid-column: 1 / span 5; /* cols 1–5 */
+    grid-row: 2 / span 3; /* rows 2–4 */
+    gap: 0.75rem;
+  }
+
+  /* Segmented Spec/Materials Card (right) */
+  .grid-right.segment-card {
+    grid-row: 5 / span 5; /* rows 8–12 */
+    align-self: start;
+    background-color: var(--card-bg);
+    box-shadow: var(--elevation-2, 0 8px 20px rgba(0, 0, 0, 0.08));
+    pointer-events: auto;
+  }
+
+  .grid-right.shot-feedback {
+    grid-row: 8 / span 5; /* rows 8–12 */
+    align-self: start;
+    background-color: var(--card-bg);
+    box-shadow: var(--elevation-2, 0 8px 20px rgba(0, 0, 0, 0.08));
+    pointer-events: auto;
+  }
+
+  /* Optional: your visual / racket wrapper if you have one */
+  .racket-wrap,
+  .grid-visual,
+  .grid-center {
+    grid-column: 4 / span 5; /* cols 4–8 */
+    grid-row: 3 / span 6; /* rows 3–8 */
+    align-self: center;
+  }
+
+  /* Comfortable touch sizes on tablet */
+  .cta {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+  .headline {
+    font-size: clamp(2.25rem, 4.2vw, 2.75rem);
+    line-height: 1.15;
+  }
+  .eyebrow {
+    font-size: 0.875rem;
+  }
+  .body {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .section-2 .grid-left {
+    /* text block */
+    grid-column: 1 / span 5; /* cols 1–5 */
+    grid-row: 2 / span 3; /* rows 2–4 */
+    gap: 0.75rem;
+  }
+
+  /* Shot feedback card = same tablet placement as section-3’s right card */
+  .section-2 .grid-right,
+  .section-2 .grid-right.shot-feedback-box {
+    grid-column: 6 / span 3; /* cols 6–8 */
+    grid-row: 8 / span 5; /* rows 8–12 */
+    align-self: start;
+    z-index: 2; /* above WebGL */
+    pointer-events: auto;
+    width: min(100%, 360px); /* keep card tidy */
+    justify-self: end; /* hug right edge of its columns */
+    box-shadow: var(--elevation-2, 0 8px 20px rgba(0, 0, 0, 0.08));
+  }
+
+  /* If you have the 3D visual wrapper, keep it centered like section-3 */
+  .section-2 .racket-wrap,
+  .section-2 .grid-center,
+  .section-2 .grid-visual {
+    grid-column: 4 / span 5; /* cols 4–8 */
+    grid-row: 3 / span 6; /* rows 3–8 */
+    align-self: center;
+  }
+
+  .fab {
+    /* sit above your bottom-center toggle if present */
+    bottom: calc(
+      var(--fab-gap) + env(safe-area-inset-bottom) + var(--toggle-clear, 0px)
+    );
+  }
+}
+
+/* Narrow phones */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section-1.grid-section {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 16px; /* gutter */
+    row-gap: 16px; /* match rows to 16px too; change if you want different */
+  }
+
+  .section-1 .headline {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 0px;
+    text-align: left;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 0px;
+    text-align: left;
+  }
+
+  .section-2 .grid-section {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 16px; /* gutter */
+    row-gap: 16px; /* match rows to 16px too; change if you want different */
+  }
+
+  .section-2 .grid-left {
+    grid-column: 1 / -1; /* not a span; uses line start→end */
+    justify-self: center;
+    width: fit-content; /* or: width:auto; max-width:680px */
+    text-align: center;
+  }
+  .section-2 .grid-right,
+  .section-2 .grid-right.shot-feedback-box {
+    grid-column: 1 / -1; /* not a span; uses line start→end */
+    justify-self: center;
+    width: fit-content; /* or: width:auto; max-width:680px */
+    text-align: center;
+  }
+
+  .when-title,
+  .when-copy,
+  .chip {
+    display: none;
+  }
+
+  .when-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color, #71d904);
+    background: var(--accent-bg, rgba(113, 217, 4, 0.12));
+    font-weight: 600;
+    width: auto; /* avoid full-width */
+    margin: 8px auto 0; /* center horizontally */
+    cursor: pointer;
+    color: var(--accent-bg);
+    font-family: var(-font-sans);
+    font-size: 1rem;
+  }
+
+  .when-btn {
+    display: inline-flex;
+    margin: 8px auto 0;
+  }
+
+  .shot-feedback-box {
+    display: grid;
+    grid-template-columns: auto 80px auto; /* label | bar | value */
+    column-gap: 8px;
+    row-gap: 12px;
+    align-items: center;
+
+    /* ✅ key fix: allow backfilling so the bar can take col-2 of the same row */
+    grid-auto-flow: dense;
+  }
+
+  /* Title & CTA span full width */
+  .shot-feedback-box > h4 {
+    grid-column: 1 / -1;
+    margin: 0 0 6px;
+    justify-self: center;
+  }
+  .shot-feedback-box .when-btn {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  /* Flatten rows into the parent grid */
+  .shot-feedback-box .feedback-row {
+    display: contents !important;
+  }
+
+  /* Place label & value */
+  .shot-feedback-box .feedback-row .label {
+    grid-column: 1;
+    margin: 0;
+  }
+  .shot-feedback-box .feedback-row .value {
+    grid-column: 3;
+    text-align: right;
+    margin: 0;
+  }
+
+  /* Bar sits in the middle column of the SAME row */
+  .shot-feedback-box .feedback-row + .progress-bar {
+    grid-column: 2;
+    width: 80px;
+    height: 10px;
+    border-radius: 999px;
+    margin: 0; /* kill any margin:auto from earlier rules */
+  }
+  .shot-feedback-box .progress-fill {
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  .section-2 .grid-section,
+  .section-3.grid-section {
+    /* display: flex; */
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 16px;
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .section-2 .grid-left .section-3 .grid-left {
+    order: 1;
+  } /* top, near nav */
+  .section-2 .grid-right {
+    order: 2;
+    margin-top: auto;
+    transform: translateY(-150px);
+  } /* pushed to bottom */
+
+  /* (If Shot Feedback sets its own z-index/transform, neutralize it) */
+  .grid-right,
+  .shot-feedback-box {
+    position: relative;
+    z-index: 5; /* below the dialog's 10000 */
+  }
+
+  .cta--desktop {
+    display: none;
+  }
+
+  .wm-chip {
+    display: inline-flex;
+  }
+
+  #when-dialog {
+    position: absolute; /* now anchors to .section-2 */
+    inset: auto 0 0 0; /* left:0; right:0; bottom:0 */
+    display: grid;
+    align-content: end;
+    justify-items: center;
+    padding: 12px;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0) 40%
+    );
+    z-index: 5; /* above section contents */
+  }
+  .wm-modal__inner {
+    width: 100%;
+    max-width: none;
+    max-height: min(70vh, 560px);
+    border-radius: 16px 16px 0 0; /* bottom-sheet look */
+  }
+
+  .cta {
+    display: block;
+    width: 100%; /* or max-width: 320px; */
+    margin: 16px 0 0 0;
+    padding: 16px 12px;
+  }
+
+  .section-3 {
+    padding-top: 56px;
+  }
+
+  .section-3 .grid-section {
+    display: block;
+  }
+  /* Hide the right card in mobile; we’ll show it in the modal instead */
+  .section-3 .grid-right.segment-card {
+    display: none;
+  }
+
+  /* Optional: slightly tighten headings/paragraphs for small screens */
+  .section-3 .grid-left h3 {
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 12px 0 8px;
+  }
+  .section-3 .grid-left p {
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 36ch;
+  }
+
+  /* Hide the desktop CTA if you want a single primary action on mobile */
+  .section-3 .grid-left .cta {
+    display: none;
+  }
+
+  /* fixed bar INSIDE section-3, visible only when .in-view is on the section */
+  .section-3 .tech-detail-bar {
+    transform: translateY(-270px);
+  }
+
+  /* keep the button visible if you want it usable under 448px */
+  /*   .section-3 .tech-detail-bar,
+  .section-3 .tech-detail-btn {
+    display: flex !important;
+  } */
+  /* --- Modal --- */
+  .tech-modal[hidden] {
+    display: inline-block;
+  }
+
+  .tech-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    pointer-events: none;
+  }
+
+  .tech-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+
+  .tech-modal.open .tech-modal__backdrop {
+    opacity: 1;
+  }
+
+  .tech-modal__dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(92vw, 420px);
+    max-height: 80vh;
+    overflow: auto;
+    transform: translate(-50%, -50%) scale(0.98);
+    border-radius: 16px;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 24, 16, 0.96),
+      rgba(8, 24, 16, 0.92)
+    );
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    opacity: 0;
+    padding: 14px 14px 18px;
+    color: var(--text, #e8f6e8);
+    pointer-events: auto; /* dialog & ✕ are clickable */
+    z-index: 1; /* above backdrop */
+  }
+
+  .tech-modal.open .tech-modal__backdrop {
+    opacity: 1;
+  }
+  .tech-modal.open .tech-modal__dialog {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Modal header */
+  .tech-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 4px 10px;
+  }
+  .tech-modal__close {
+    border: 0;
+    background: transparent;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--text, #e8f6e8);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .modal-segment-card .segbar {
+    margin-bottom: 10px;
+  }
+  .modal-segment-card .rows .row {
+    padding: 10px 6px;
+  }
+
+  /* Prevent scroll on body while modal is open */
+  body.modal-open {
+    overflow: hidden;
+  }
+
+  .section-3 .tech-toggle-wrap {
+    display: none !important;
+  }
+  .section-2 .cta--desktop {
+    display: none !important;
+  }
+}

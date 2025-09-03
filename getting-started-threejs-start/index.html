@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robot Bobby Three.js Template</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaquery.css">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<!-- ==== NAVIGATION (drop-in) ==== -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.module.js",
+          "jsm/": "https://cdn.jsdelivr.net/npm/three@0.150.0/examples/jsm/",
+          "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.2/index.js",
+      "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.12.2/ScrollTrigger.js",
+       "gsap/ScrollToPlugin": "https://cdn.jsdelivr.net/npm/gsap@3.12.2/ScrollToPlugin.js"
+  }
+        }
+      
+    </script>
+        <!-- Add GSAP via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  </head>
+  </head>
+<body>
+
+<header class="nav" id="site-nav">
+  <div class="nav__bar">
+    <a class="nav__brand" href="#home" aria-label="Brand home">
+      <span class="nav__brand-mark" aria-hidden="true"></span>
+      RAX™
+    </a>
+
+    <!-- Hamburger on the right -->
+    <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+      <span class="nav__hamburger" aria-hidden="true"></span>
+      <span class="sr-only">Toggle menu</span>
+    </button>
+
+    <!-- Menu -->
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link active" href="#home">Home</a></li>
+        <li><a class="nav__link" href="#tech">Interaction Hint</a></li>
+        <li><a class="nav__link" href="#features">Key Features</a></li>
+        <a class="btn-primary" href="#preorder">Preorder</a>
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home"><h2>Home</h2></section>
+  <section id="tech"><h2>Interaction Hint</h2></section>
+  <section id="features"><h2>Key Features</h2></section>
+  <section id="preorder"><h2>Preorder</h2></section>
+</main>
+
+  <!-- Three.js canvas -->
+  <canvas id="three-canvas"></canvas>
+  <!-- Click/drag indicator (Section-2) -->
+<div id="click-indicator" role="button" aria-label="Try interacting with the strings">
+  <span class="pulse"></span>
+  <span class="hint">Drag to test strings</span>
+</div>
+  <!-- Section 1 -->
+  <section class="section-1">
+    <div class="container">
+      <div class="grid-section">
+        <!-- Intro -->
+     
+
+        <!-- Left: Text Content -->
+        <div class="grid-left">
+                 <div class="intro">
+          <header>
+            <p class="eyebrow">Introducing the Velocity X1</p>
+          </header>
+        </div>
+          <h1 class="headline">Play with Power and Precision</h1>
+          <h2 class="subhead">Carbon frame for spin and accuracy</h2>
+          <!-- <p>Rotate the model, zoom in for details, or tap to reveal what makes it unique.</p> -->
+          <button class="cta">PRE-ORDER NOW</button>
+          <h5 class="launch-note">Available globally from January 10, 2025</h5>
+        </div>
+
+ 
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section-2">
+    <div class="container">
+      
+      <div class="grid-section">
+        <!-- Intro -->
+       
+
+        <!-- Left: Text Content -->
+       <div class="grid-left">
+         <div class="intro">
+          <header>
+            <p class="eyebrow">New Experience</p>
+          </header>
+        </div>
+          <h3>Interact with the racket in 3D</h3>
+          <p>Rotate the model, zoom in for details, or tap to reveal what makes it unique.</p>
+          <button class="cta cta--desktop">
+            REPLAY NOW
+            <i class="fa-solid fa-rotate-right" style="margin-left: 8px;"></i>
+          </button>
+        </div> 
+        
+
+      <!--  Shot feedback (adjust placement with CSS grid as needed) -->
+ <div class="grid-right shot-feedback-box">
+
+ 
+          <h4>Shot Feedback</h4>
+
+          <div class="feedback-row">
+            <span class="label">Precision</span>
+            <span class="value">%87</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 87%;"></div>
+          </div>
+
+          <div class="feedback-row">
+            <span class="label">Stability</span>
+            <span class="value">%88</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 88%;"></div>
+          </div>
+
+           <!-- Context -->
+  <h5 class="when-title">When it matters most</h5>
+    <p class="when-copy">
+    Returns, volleys, blocking fast balls, hitting outside the sweet spot, and late contact.
+  </p>
+
+  <!-- Benefit chip -->
+  <div class="chip chip--positive" aria-label="Reduced vibration">
+    <svg class="chip-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path fill="currentColor"
+            d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4zm-1.2 13.6l6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4 3.6 3.6z"/>
+    </svg>
+    <span>Reduced vibration</span>
+  </div>
+
+  <!-- mobile-only trigger -->
+<button class="when-btn" type="button" aria-controls="when-dialog" aria-expanded="false">
+  <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true" aria-controls="when-dialog" aria-expanded="false">
+    <!-- circle -->
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+    <!-- exclamation bar -->
+    <rect x="11" y="6" width="2" height="8" rx="1" fill="currentColor"/>
+    <!-- dot -->
+    <circle cx="12" cy="18" r="1.5" fill="currentColor"/>
+  </svg>
+  <span>When it matters most</span>
+</button>
+
+
+
+        </div> 
+        
+
+    
+        
+
+      </div>
+<!-- Screen 2: HDR Background Toggle -->
+<!-- <div class="hud-bottom-center">
+  <div class="toggle toggle-hdr">
+    <input type="checkbox" id="hdrSwitch" />
+    <label for="hdrSwitch">
+      <span class="knob"></span>
+      <span class="txt off">HDR Off</span>
+      <span class="txt on">HDR On</span>
+    </label>
+  </div>
+</div>  -->
+    </div>
+
+    <!-- Click/drag indicator (Section-2) -->
+<div id="click-indicator" role="button" aria-label="Try interacting with the strings">
+  <span class="pulse"></span>
+  <span class="hint">Drag to test strings</span>
+</div>
+
+  <!-- Dim layer (no clicks) -->
+  <div class="section-2__scrim" aria-hidden="true"></div>
+ <!-- Bottom-sheet modal lives INSIDE section-2 -->
+  <div id="when-dialog" class="when-dialog" role="dialog"
+       aria-modal="true" aria-labelledby="wm-title" hidden>
+    <div class="wm-modal__inner" role="document">
+      <h5 id="wm-title">
+        <svg class="wm-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+          <rect x="11" y="6" width="2" height="8" rx="1" fill="currentColor"/>
+          <circle cx="12" cy="18" r="1.5" fill="currentColor"/>
+        </svg>
+        When it matters most
+      </h5>
+
+      <p>Returns, volleys, blocking fast balls, hitting outside the sweet spot, and late contact.</p>
+
+      <div class="wm-chip wm-chip--positive" aria-label="Reduced vibration">
+        <svg class="wm-chip__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="currentColor" d="M12 2l8 4v6c0 5-3.8 9.7-8 10-4.2-.3-8-5-8-10V6l8-4zm-1.2 13.6l6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4 3.6 3.6z"/>
+        </svg>
+        <span>Reduced vibration</span>
+      </div>
+
+      <figure class="wm-visual">
+        <!-- remove the space in filename -->
+        <img src="./assets/image- sign.png" alt="Racket head highlighting the sweet spot and damping zone.">
+      </figure>
+
+      <button class="wm-primary wm-close" type="button">GOT IT</button>
+    </div>
+  </div>
+
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section-3">
+    <div class="container">
+      <div class="grid-section">
+     
+
+        <!-- Left: Text Content -->
+        <div class="grid-left">
+             <!-- Intro -->
+        <div class="intro">
+          <header>
+            <p class="eyebrow">Tech</p>
+          </header>
+        </div>
+          <h3>Engineered for Control. <br />Tuned for Power.</h3>
+          <!-- <h2 class="subhead">Carbon frame for spin and accuracy</h2> -->
+          <p>Explore the geometry and materials that deliver pro-level consistency.</p>
+          <button class="cta">
+            ORDER NOW
+          
+          </button>
+
+        </div>
+
+
+<div class="grid-right segment-card ">
+    <!-- Segmented control (CSS-only) -->
+  <input type="radio" name="seg2" id="tab-spec" checked>
+  <input type="radio" name="seg2" id="tab-materials">
+ <div class="segbar" role="tablist" aria-label="Racket details">
+    <label for="tab-spec" role="tab" aria-controls="panel-spec">Spec</label>
+    <label for="tab-materials" role="tab" aria-controls="panel-materials">Materials</label>
+    <span class="thumb" aria-hidden="true"></span>
+  </div>
+
+  <div class="seg-panels">
+    <!-- SPEC -->
+    <section id="panel-spec" class="seg-panel">
+      <ul class="rows condensed">
+        <li class="row " data-key="head">
+          <!-- Head Size icon -->
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crosshair-icon lucide-crosshair"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+          
+<span class="label">Head Size</span>
+          <span class="value">98 in²</span>
+    
+          
+                    <p>for a balance of power and control</p>
+
+         
+        </li>
+
+        <li class="row" data-key="weight">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-weight-icon lucide-weight"><circle cx="12" cy="5" r="3"/><path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.5A2 2 0 0 0 4 21h16a2 2 0 0 0 1.925-2.54L19.4 9.5A2 2 0 0 0 17.48 8Z"/></svg>
+
+          <span class="label">Weight</span>
+          <span class="value">285 g</span>
+                           <p>for a balance of power and control</p>
+
+        </li>
+
+        <li class="row" data-key="balance">
+          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="Balance point" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3 12h7M21 12h-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+  <path d="M7 9l-4 3 4 3M17 9l4 3-4 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="1.8"></circle>
+</svg>
+          <span class="label">Balance</span>
+          <span class="value">32.5 cm</span>
+                              <p>for a balance of power and control</p>
+
+         
+        </li>
+
+        <li class="row" data-key="strings">
+          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" role="img" aria-label="String pattern" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"></rect>
+  <path d="M8 4v16M12 4v16M16 4v16M4 8h16M4 12h16M4 16h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+</svg>
+          <span class="label">String Pattern</span>
+          <span class="value">16×19</span>
+                              <p>for a balance of power and control</p>
+
+     
+        </li>
+      </ul>
+    </section>
+
+    <!-- MATERIALS -->
+    <section id="panel-materials" class="seg-panel">
+      <ul class="rows condensed">
+        <li class="row">
+          <span class="label">Frame </span>
+          <span class="value">Graphite Composite</span>
+        </li>
+
+        <li class="row">
+          <span class="label">Basalt/Aramid Fibers</span>
+          <span class="value">Dampening</span>
+        </li>
+
+        <li class="row">
+          <span class="label">PU Overgrip</span>
+          <span class="value">Grip</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+
+
+</div>
+
+
+        
+
+
+      </div>
+
+  <!-- inside .section-3 -->
+<div class="tech-toggle-wrap" role="group" aria-labelledby="tech-toggle-label">
+  <span id="tech-toggle-label" class="tech-toggle-label">Technical view</span>
+  <label class="toggle-xl">
+    <input type="checkbox" id="techViewToggle" aria-labelledby="tech-toggle-label">
+    <span class="track" aria-hidden="true">
+      <span class="state">
+        <span class="label-off">Off</span>
+        <span class="label-on">On</span>
+      </span>
+    </span>
+  </label>
+</div>
+
+<!-- Sticky button lives INSIDE section-3 -->
+<div class="  tech-detail-bar">
+  <button class="cta tech-detail-btn" id="openTechModal" aria-haspopup="dialog" aria-controls="techModal">
+    TECHNICAL DETAIL
+  </button>
+</div>
+
+<!-- Modal (mobile) -->
+<div id="techModal" class="tech-modal" role="dialog" aria-modal="true" aria-labelledby="techModalTitle" hidden>
+  <div class="tech-modal__backdrop" data-close-modal></div>
+
+  <div class="tech-modal__dialog" role="document">
+    <header class="tech-modal__header">
+      <h4 id="techModalTitle">Technical Detail</h4>
+     <button type="button"
+              id="closeTechModal"
+              class="tech-modal__close"
+              data-close-modal
+              aria-label="Close">✕</button>    </header>
+
+    <!-- Segmented card (mobile copy with unique IDs/names) -->
+    <div class="segment-card modal-segment-card">
+      <input type="radio" name="m-seg2" id="m-tab-spec" checked>
+      <input type="radio" name="m-seg2" id="m-tab-materials">
+
+      <div class="segbar" role="tablist" aria-label="Racket details">
+        <label for="m-tab-spec" role="tab" aria-controls="m-panel-spec">Spec</label>
+        <label for="m-tab-materials" role="tab" aria-controls="m-panel-materials">Materials</label>
+        <span class="thumb" aria-hidden="true"></span>
+      </div>
+
+      <div class="seg-panels">
+        <!-- SPEC -->
+        <section id="m-panel-spec" class="seg-panel">
+          <ul class="rows condensed">
+            <li class="row" data-key="head">
+              <!-- (same icon markup as desktop) -->
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+              <span class="label">Head Size</span><span class="value">98 in²</span>
+              <p>for a balance of power and control</p>
+            </li>
+
+            <li class="row" data-key="weight">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.5A2 2 0 0 0 4 21h16a2 2 0 0 0 1.925-2.54L19.4 9.5A2 2 0 0 0 17.48 8Z"/></svg>
+              <span class="label">Weight</span><span class="value">285 g</span>
+              <p>for a balance of power and control</p>
+            </li>
+
+            <li class="row" data-key="balance">
+              <svg class="icon" width="24" height="24" viewBox="0 0 24 24" role="img" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12h7M21 12h-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M7 9l-4 3 4 3M17 9l4 3-4 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle cx="12" cy="12" r="2.2" stroke="currentColor" stroke-width="1.8"></circle>
+              </svg>
+              <span class="label">Balance</span><span class="value">32.5 cm</span>
+              <p>for a balance of power and control</p>
+            </li>
+
+            <li class="row" data-key="strings">
+              <svg class="icon" width="24" height="24" viewBox="0 0 24 24" role="img" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"></rect>
+                <path d="M8 4v16M12 4v16M16 4v16M4 8h16M4 12h16M4 16h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+              </svg>
+              <span class="label">String Pattern</span><span class="value">16×19</span>
+              <p>for a balance of power and control</p>
+            </li>
+          </ul>
+        </section>
+
+        <!-- MATERIALS -->
+        <section id="m-panel-materials" class="seg-panel">
+          <ul class="rows condensed">
+            <li class="row"><span class="label">Frame</span><span class="value">Graphite Composite</span></li>
+            <li class="row"><span class="label">Basalt/Aramid Fibers</span><span class="value">Dampening</span></li>
+            <li class="row"><span class="label">PU Overgrip</span><span class="value">Grip</span></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    </div>
+
+    
+
+  </section>
+
+
+
+
+
+  <button class="fab fab-up"  aria-label="Scroll up">↑</button>
+  <button class="fab fab-down" aria-label="Scroll down">↓</button>
+  <!-- Optional: container where Three.js can inject additional content -->
+  <div class="scene-container"></div>
+
+    <footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="f-brand">
+        <a class="logo" href="#home" aria-label="RAX home">
+          <span class="logo-mark" aria-hidden="true"></span>
+          RAX™
+        </a>
+        <p class="f-tag">Precision-built performance gear for modern players.</p>
+      </div>
+
+      <!-- Links 1 -->
+      <nav class="f-col" aria-label="Product">
+        <h4>Product</h4>
+        <ul class="f-links">
+          <li><a href="#features">Key Features</a></li>
+          <li><a href="#tech">Interaction Hint</a></li>
+          <li><a href="#preorder">Preorder</a></li>
+        </ul>
+      </nav>
+
+      <!-- Links 2 -->
+      <nav class="f-col" aria-label="Company">
+        <h4>Company</h4>
+        <ul class="f-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="#legal">Legal</a></li>
+        </ul>
+      </nav>
+
+      <!-- Newsletter -->
+      <div class="f-col newsletter">
+        <h4>Stay in the loop</h4>
+        <form class="nl-form" action="#" method="post" novalidate>
+          <label class="sr-only" for="nl-email">Email</label>
+          <input id="nl-email" type="email" placeholder="you@example.com" required>
+          <button class="btn-ghost" type="submit">Subscribe</button>
+        </form>
+        <small class="nl-hint">No spam. Unsubscribe anytime.</small>
+      </div>
+    </div>
+
+    <div class="f-bottom">
+      <span class="legal">© <span id="year"></span> RAX. All rights reserved.</span>
+      <div class="socials" aria-label="Social links">
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube" title="YouTube">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.6 41.6 0 0 0 0 12a41.6 41.6 0 0 0 .5 5.8 4 4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.5-3.8.5-5.8s-.2-3.9-.5-5.8ZM9.75 15.02V8.98L15.5 12l-5.75 3.02Z"/></svg>
+        </a>
+        <a href="#" aria-label="X (Twitter)" title="X">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.2 2H21l-6.6 7.5L22 22h-5.9l-4.6-6.1L6 22H3.2l7.1-8.1L2 2h6l4.1 5.5L18.2 2Zm-2.1 18h2.2L8 4H5.7l10.4 16Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script type="module" src="navigation.js"></script>
+  <script type="module" src="index.js"></script>
+  
+
+
+</body>
+
+</html>
