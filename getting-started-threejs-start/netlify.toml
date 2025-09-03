@@ -1,0 +1,9 @@
+[build]
+  command = ""
+  publish = "getting-started-threejs-start"
+
+# keep if you later add client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
